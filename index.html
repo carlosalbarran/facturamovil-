@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <script src="cordova.js"></script>
+        <script src="Plugins/Barcode Scanner/barcodescanner.js"></script>
+        <script src="Plugins/SQLite/SQLitePlugin.js"></script>
+        <script src="Plugins/Child Browser/childbrowser.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="scripts/shoppinglist.js"></script>
+        <script src="scripts/Parser.js"></script>
+
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+            
+    </head>
+    <body>
+        <div data-role="view" id="tabstrip-scan" data-title="Factura Movil">
+			<div class="buttonArea">
+                 
+                <img src="styles/img/escaneo.png">
+                <h4>
+                 Para leer los datos de tu factura, acerca tu cámara al codigo QR. La factura
+                debe ser original y emitida por SAT.
+              </h4>	
+              
+   
+           
+                    
+				<a data-role="button" id="scanButton" data-icon="camera" data-click="myApp.scan" class="largerButton extraSpace">Leer Factura QR</a>
+                <div id="scanResult" class="extraSpace" style="font-size: 1.5em; margin: 2em;"></div>
+        
+                
+            <div id="qrListaDiv" class="extraSpace" style="font-size: 1.5em; margin: 2em;"  >
+              <div data-role=content>
+                <ul id=qrLista data-role=listview data-inset=true>
+               </ul>
+              </div>
+		    </div>
+           
+                
+         <div id="dRE" class="extraSpace" style="font-size: 1.5em; margin: 2em;"></div>
+        <div id="dRR" class="extraSpace" style="font-size: 1.5em; margin: 2em;"></div>
+        <div id="dTT" class="extraSpace" style="font-size: 1.5em; margin: 2em;"></div>
+        <div id="dID" class="extraSpace" style="font-size: 1.5em; margin: 2em;"></div>
+        
+        
+                
+                
+           	</div>
+        </div>
+        
+        
+        <div data-role="view" id="tabstrip-rfc" data-title="Validar RFC">
+            <div class="buttonArea">
+                <img src="styles/img/validador.png">
+                <h4>
+                 Para verificar si un RFC es válido introducelo con su homoclave. Haremos una búsqueda en los servicios
+                    del SAT. Para conocer más detalles del RFC deberá de estar registrado en ALSEA previamente.
+                    
+              </h4>
+                
+                <input class="inputBox" type="text" id="txtItemRFC" placeholder="RFC" /><br><br>
+                <a id="addButtonRFC"  data-role="button" data-click="addItemRFC" data-icon="action" class="largerButton">Validar RFC</a>
+           
+             <div id="rfcResult" class="extraSpace" style="font-size: 1.5em; margin: 2em;"  ></div>
+            
+            <div id="espera" class="extraSpace" style="font-size: 1.5em; margin: 2em;"  ></div>
+           
+                
+                <div id="rfcListaDiv" class="extraSpace" style="font-size: 1.5em; margin: 2em;"  >
+             <div data-role=content>
+                <ul id=rfcLista data-role=listview data-inset=true></ul>
+             </div>
+            </div>
+                
+            </div>
+               
+           </div>
+        
+        
+        
+        
+        
+        <div data-role="view" id="tabstrip-list" data-title="QR Verificados">
+            <div class="buttonArea">
+            
+            <img src="styles/img/historico.png">
+                <h4>
+                 En esta parte podras encontrar el registro de todos las facturas validadas mediante QR que hayas realizado.
+                 Puedes eliminarlas haciendo click en el checkbox de la derecha.
+                </h4>
+                    
+            </div>
+            <div id="itemContainer">
+                <ul id="activeItemList"></ul>
+            </div>
+        </div>
+        
+        <div data-role="view" id="tabstrip-done" data-title="Acerca de">
+            <div class="buttonArea"> 
+            <img src="styles/img/acercade.png">
+                <h4>
+                    FACTURA Móvil:Copyright 2013.<br> App que te permite escanear y verificar el contenido de los QR de las facturas emitidas por SAT de MEXICO.Además verifica con SAT la validez de los RFC y obtiene datos adicionales de los mismos a través del servicio Web de Alsea (Starbucks, Chilis, Burguer King).
+					 <br> 
+                    </h4>
+                <h5>
+					Alsea, Starbucks, Chilis, Dominos Pizza, Burguer King son marcas registradas de Alsea.
+                    
+                    
+                <h1>  
+               
+            </div>  
+        </div>
+
+        <div data-role="layout" data-id="mobile-tabstrip">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-scan" data-icon="camera">QR</a>
+                    <a href="#tabstrip-list" data-icon="bookmarks">Verificadas</a>
+                    <a href="#tabstrip-rfc" data-icon="organize">RFC</a>
+                    <a href="#tabstrip-done" data-icon="action">Acerca De</a>
+                </div>
+            </div>
+        </div>
+
+        <script id="list-template" type="text/x-kendo-template">
+            <span>#: item_name #<a data-role='detailbutton' data-click='markComplete' data-id='#:id#' data-icon='check'></a></span>
+        </script>
+        <script id="completed-list-template" type="text/x-kendo-template">
+            <span>#: item_name #</span>
+        </script>
+    </body>
+</html>
